@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railroad Solitaire | The 0.706% Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0c10;
+            --card-dark: #161b22;
+            --accent-gold: #c9a063;
+            --accent-hover: #e5c08a;
+            --text: #f0f6fc;
+            --text-dim: #8b949e;
+            --card-white: #ffffff;
+            --card-red: #d63031;
+            --card-black: #1a1a1a;
+        }
+
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Hero with Semi-Transparent Load Screen */
+        .hero {
+            position: relative;
+            padding: 140px 20px;
+            text-align: center;
+            background: linear-gradient(rgba(10, 12, 16, 0.75), rgba(10, 12, 16, 0.75)), 
+                        url('Railroad.png') center/cover no-repeat;
+            border-bottom: 1px solid #30363d;
+        }
+
+        h1 { 
+            font-size: 4.5rem; 
+            font-weight: 900; 
+            margin: 0; 
+            text-transform: uppercase; 
+            letter-spacing: -2px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .math-ticker {
+            color: var(--accent-gold);
+            font-weight: 700;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+        /* Waitlist Section */
+        .waitlist-card {
+            background: var(--card-dark);
+            border: 1px solid #30363d;
+            border-radius: 24px;
+            padding: 60px 30px;
+            text-align: center;
+            margin: -60px auto 60px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            max-width: 800px;
+        }
+
+        .btn-waitlist {
+            background: var(--accent-gold);
+            color: #000;
+            padding: 20px 45px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 900;
+            display: inline-block;
+            font-size: 1.2rem;
+            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 10px 20px rgba(201, 160, 99, 0.2);
+            margin-top: 20px;
+        }
+
+        .btn-waitlist:hover { transform: scale(1.05); background: var(--accent-hover); }
+
+        /* Mechanics Section */
+        .mechanics-section {
+            margin: 60px 0;
+            padding: 40px;
+            background: rgba(201, 160, 99, 0.03);
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 0 24px 24px 0;
+        }
+
+        .mechanics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .mechanic-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mechanic-box h4 {
+            color: var(--accent-gold);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Card Match CSS Visuals */
+        .card-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .card-demo {
+            width: 50px;
+            height: 70px;
+            background: var(--card-white);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 5px;
+            box-sizing: border-box;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: var(--card-black);
+            border: 1px solid #30363d;
+            position: relative;
+        }
+
+        .card-demo.red { color: var(--card-red); }
+        .card-demo.highlight {
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 4px 8px rgba(201, 160, 99, 0.3);
+        }
+
+        .discard-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 12, 16, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            border-radius: 4px;
+        }
+
+        /* Desktop Buttons */
+        .desktop-vault {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #30363d;
+            border-radius: 24px;
+            padding: 50px;
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .btn-desktop {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid #484f58;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-desktop:hover {
+            background: #30363d;
+            border-color: var(--accent-gold);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            .mechanics-grid { grid-template-columns: 1fr; }
+            .waitlist-card { margin-top: -40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <span class="math-ticker">Simulation Verified • 0.706% Win Rate</span>
+        <h1>Railroad Solitaire</h1>
+    </header>
+
+    <div class="container">
+        
+<section class="waitlist-card">
+    <h2>iOS Version in Development</h2>
+    <p style="color: var(--text-dim); max-width: 600px; margin: 0 auto 30px;">
+        The world's most mathematically rigorous solitaire challenge is coming to mobile. 350+ billion simulations have defined this definitive elite experience.
+    </p>
+    <a href="signup.html" class="btn-waitlist">CLICK HERE TO JOIN THE WAITLIST</a>
+</section>
+
+        <section class="mechanics-section">
+            <h2 style="font-size: 2rem; margin-top: 0;">How the Tracks Collapse</h2>
+            <p style="color: var(--text-dim); font-size: 1.1rem;">
+                Railroad is a game of alignment and chain reactions. 52 cards are dealt one-by-one into a single row. Your success depends on the relationship between the 1st and 4th cards from the right.
+            </p>
+
+            <div class="mechanics-grid">
+                <div class="mechanic-box">
+                    <h4>The Rank Match</h4>
+                    <p>If the 1st and 4th cards share the same <strong>Rank</strong> (e.g., two Kings), all four cards in that set are discarded.</p>
+                    <div class="card-row">
+                        <div class="card-demo highlight"><span>K</span><span>♠</span><div class="discard-overlay">✕</div></div>
+                        <div class="card-demo"><span>J</span><span>♦</span><div class="discard-overlay">✕</div></div>
+                        <div class="card-demo red"><span>2</span><span>♥</span><div class="discard-overlay">✕</div></div>
+                        <div class="card-demo highlight red"><span>K</span><span>♥</span><div class="discard-overlay">✕</div></div>
+                    </div>
+                </div>
+
+                <div class="mechanic-box">
+                    <h4>The Suit Match</h4>
+                    <p>If the 1st and 4th cards share the same <strong>Suit</strong> (e.g., two Hearts), the two cards trapped in the middle are discarded.</p>
+                    <div class="card-row">
+                        <div class="card-demo highlight red"><span>K</span><span>♥</span></div>
+                        <div class="card-demo"><span>8</span><span>♣</span><div class="discard-overlay">✕</div></div>
+                        <div class="card-demo red"><span>3</span><span>♦</span><div class="discard-overlay">✕</div></div>
+                        <div class="card-demo highlight red"><span>5</span><span>♥</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-top: 30px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px;">
+                <strong>The Cascade:</strong> Every time cards are removed, the row collapses. This can trigger a chain reaction, allowing you to clear massive sections of the track in a single move.
+                <br><br>
+                <em>The ultimate goal? Clear all 52 cards for a score of zero.</em>
+            </p>
+        </section>
+
+        <div class="desktop-vault">
+            <h3 style="margin-bottom: 25px;">Early Access Desktop Preview (v3.1.1)</h3>
+            <a href="https://github.com/cmac1071/Railroad/releases/download/v3.1.1/Railroad_v3_1_1_macOS.zip" class="btn-desktop">
+                Download for macOS
+            </a>
+            <a href="https://github.com/cmac1071/Railroad/releases/download/v3.1.1/Railroad_v3_1_1_Windows.zip" class="btn-desktop">
+                Download for Windows
+            </a>
+            <p style="margin-top: 25px;">
+                <a href="https://github.com/cmac1071/Railroad" style="color: var(--accent-gold); text-decoration: none; font-size: 0.9rem;">View Source on GitHub</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

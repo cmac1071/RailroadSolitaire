@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Waitlist | Railroad Solitaire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0c10;
+            --card-dark: #161b22;
+            --accent-gold: #c9a063;
+            --accent-hover: #e5c08a;
+            --text: #f0f6fc;
+            --text-dim: #8b949e;
+        }
+
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .signup-container {
+            background: var(--card-dark);
+            border: 1px solid #30363d;
+            border-radius: 24px;
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            max-width: 450px;
+            width: 90%;
+        }
+
+        h2 { font-size: 2.2rem; margin-top: 0; font-weight: 900; letter-spacing: -1px; }
+        p { color: var(--text-dim); margin-bottom: 40px; }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+            background: #0d1117;
+            color: white;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        input[type="email"]:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .btn-submit {
+            background: var(--accent-gold);
+            color: #000;
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            background: var(--accent-hover);
+            box-shadow: 0 10px 20px rgba(201, 160, 99, 0.2);
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover { color: var(--accent-gold); }
+
+        #success-msg { color: #10b981; margin-top: 20px; display: none; }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Join the Elite</h2>
+        <p>Be notified as soon as the iOS version is available for iPhone and iPad.</p>
+    
+        <form id="waitlist-form">
+            <div class="form-group">
+                <label for="email">CHALLENGER EMAIL</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+            <button type="submit" id="submit-btn" class="btn-submit">GET UPDATES</button>
+            <div id="status-msg" style="margin-top: 20px; font-weight: bold; display: none;"></div>
+        </form>
+        <a href="index.html" class="back-link">← Return to Railroad Solitaire</a>
+    </div>
+    <script>
+        const form = document.getElementById('waitlist-form');
+        const btn = document.getElementById('submit-btn');
+        const msg = document.getElementById('status-msg');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.innerText = "SENDING...";
+            msg.style.display = "block";
+            msg.innerText = "Registering on the tracks...";
+            msg.style.color = "var(--accent-gold)";
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbx9bzw4_E3CgpsETskEiF2Q7OZbLiUgRKpwx-1tD59dEISjpWAoQTjYxvR9trRZKkZySA/exec';
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: new FormData(form)
+            })
+            .then(response => {
+                msg.innerText = "SUCCESS! Redirecting...";
+                msg.style.color = "#10b981";
+                // Wait 1.5 seconds so they see the success message, then redirect
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+             })
+            .catch(error => {
+                btn.disabled = false;
+                btn.innerText = "GET UPDATES";
+                msg.innerText = "Error. Please try again.";
+                msg.style.color = "#d63031";
+                console.error('Error!', error.message);
+            });
+        });
+    </script>
+</body>
+</html>
