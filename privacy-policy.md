@@ -18,7 +18,7 @@ The current version of this app does not display advertisements.
 
 ## Contact
 
-If you have questions about this privacy policy, please contact: [your email]
+If you have questions about this privacy policy, please contact: railroadsolitaire@yahoo.com
 
 ## Changes
 
