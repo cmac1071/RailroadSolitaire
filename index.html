@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Railroad Solitaire | The 0.706% Challenge</title>
+    <title>Railroad! Solitaire | The 0.706% Challenge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -60,8 +60,8 @@
 
         .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
 
-        /* Waitlist Section */
-        .waitlist-card {
+        /* Download Section */
+        .download-card {
             background: var(--card-dark);
             border: 1px solid #30363d;
             border-radius: 24px;
@@ -74,21 +74,36 @@
             max-width: 800px;
         }
 
-        .btn-waitlist {
-            background: var(--accent-gold);
-            color: #000;
-            padding: 20px 45px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 900;
-            display: inline-block;
-            font-size: 1.2rem;
-            transition: transform 0.2s, background 0.2s;
-            box-shadow: 0 10px 20px rgba(201, 160, 99, 0.2);
-            margin-top: 20px;
+        .download-card h2 {
+            margin-top: 0;
         }
 
-        .btn-waitlist:hover { transform: scale(1.05); background: var(--accent-hover); }
+        .app-store-badge {
+            margin-top: 25px;
+            transition: transform 0.2s;
+        }
+
+        .app-store-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .app-store-badge img {
+            height: 60px;
+        }
+
+        .updates-link {
+            display: block;
+            margin-top: 25px;
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .updates-link:hover {
+            color: var(--accent-hover);
+        }
 
         /* Mechanics Section */
         .mechanics-section {
@@ -192,7 +207,7 @@
         @media (max-width: 768px) {
             h1 { font-size: 2.8rem; }
             .mechanics-grid { grid-template-columns: 1fr; }
-            .waitlist-card { margin-top: -40px; }
+            .download-card { margin-top: -40px; }
         }
     </style>
 </head>
@@ -200,18 +215,21 @@
 
     <header class="hero">
         <span class="math-ticker">Simulation Verified • 0.706% Win Rate</span>
-        <h1>Railroad Solitaire</h1>
+        <h1>Railroad! Solitaire</h1>
     </header>
 
     <div class="container">
         
-<section class="waitlist-card">
-    <h2>iOS Version in Development</h2>
-    <p style="color: var(--text-dim); max-width: 600px; margin: 0 auto 30px;">
-        The world's most mathematically rigorous solitaire challenge is coming to mobile. 350+ billion simulations have defined this definitive elite experience.
-    </p>
-    <a href="signup.html" class="btn-waitlist">CLICK HERE TO JOIN THE WAITLIST</a>
-</section>
+        <section class="download-card">
+            <h2>Now Available on iOS</h2>
+            <p style="color: var(--text-dim); max-width: 600px; margin: 0 auto;">
+                The world's most mathematically rigorous solitaire challenge is here. 350+ billion simulations have defined this elite experience.
+            </p>
+            <a href="https://apps.apple.com/app/id6758528011" class="app-store-badge">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+            </a>
+            <a href="signup.html" class="updates-link">📧 Sign up for email updates on future versions</a>
+        </section>
 
         <section class="mechanics-section">
             <h2 style="font-size: 2rem; margin-top: 0;">How the Tracks Collapse</h2>
@@ -251,7 +269,7 @@
         </section>
 
         <div class="desktop-vault">
-            <h3 style="margin-bottom: 25px;">Early Access Desktop Preview (v3.1.1)</h3>
+            <h3 style="margin-bottom: 25px;">Desktop Version (v3.1.1)</h3>
             <a href="https://github.com/cmac1071/RailroadSolitaire/releases/download/v3.1.1/Railroad_v3_1_1_macOS.zip" class="btn-desktop">
                 Download for macOS
             </a>
@@ -260,6 +278,6 @@
             </a>
         </div>
     </div>
-<p>Copyright (c) 2026 Chris MacLellan</p>
+    <p style="text-align: center; color: var(--text-dim);">Copyright © 2026 Chris MacLellan</p>
 </body>
 </html>

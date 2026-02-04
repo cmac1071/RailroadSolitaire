@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join the Waitlist | Railroad Solitaire</title>
+    <title>Get Updates | Railroad! Solitaire</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -23,6 +23,7 @@
             color: var(--text); 
             margin: 0; 
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -108,18 +109,18 @@
 </head>
 <body>
     <div class="signup-container">
-        <h2>Join the Elite</h2>
-        <p>Be notified as soon as the iOS version is available for iPhone and iPad.</p>
+        <h2>Stay in the Loop</h2>
+        <p>Get notified about new features, updates, and bonus content for Railroad! Solitaire.</p>
     
         <form id="waitlist-form">
             <div class="form-group">
-                <label for="email">CHALLENGER EMAIL</label>
+                <label for="email">YOUR EMAIL</label>
                 <input type="email" id="email" name="email" placeholder="you@example.com" required>
             </div>
             <button type="submit" id="submit-btn" class="btn-submit">GET UPDATES</button>
             <div id="status-msg" style="margin-top: 20px; font-weight: bold; display: none;"></div>
         </form>
-        <a href="index.html" class="back-link">← Return to Railroad Solitaire</a>
+        <a href="index.html" class="back-link">← Return to Railroad! Solitaire</a>
     </div>
     <script>
         const form = document.getElementById('waitlist-form');
@@ -143,7 +144,6 @@
             .then(response => {
                 msg.innerText = "SUCCESS! Redirecting...";
                 msg.style.color = "#10b981";
-                // Wait 1.5 seconds so they see the success message, then redirect
                 setTimeout(() => {
                     window.location.href = 'index.html';
                 }, 1500);
@@ -157,5 +157,6 @@
             });
         });
     </script>
+<p style="text-align: center; color: var(--text-dim); margin-top: 40px; font-size: 0.85rem;">Copyright © 2026 Chris MacLellan</p>
 </body>
 </html>
